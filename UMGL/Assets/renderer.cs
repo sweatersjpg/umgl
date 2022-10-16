@@ -38,7 +38,7 @@ public class renderer : MonoBehaviour
         mr.material.SetTexture("_MainTex", rt);
         //mr.material.SetTexture("_EmissionMap", rt);
 
-        //rt.filterMode = FilterMode.Point;
+        rt.filterMode = FilterMode.Point;
 
         SW = spriteSheet.width;
         SH = spriteSheet.height;
