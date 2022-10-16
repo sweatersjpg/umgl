@@ -8,12 +8,12 @@ public class renderer : MonoBehaviour
     Texture spriteSheet;
 
     [SerializeField]
-    int frameRate;
+    int frameRate = 60;
 
     [SerializeField]
-    int width;
+    int width = 256;
     [SerializeField]
-    int height;
+    int height = 256;
 
     RenderTexture rt;
 
@@ -21,6 +21,11 @@ public class renderer : MonoBehaviour
 
     float SW;
     float SH;
+
+    float t = 0;
+
+    Vector2 pos;
+    Vector2 vel;
 
     // Start is called before the first frame update
     void Start()
@@ -33,21 +38,25 @@ public class renderer : MonoBehaviour
         mr.material.SetTexture("_MainTex", rt);
         //mr.material.SetTexture("_EmissionMap", rt);
 
-        rt.filterMode = FilterMode.Point;
+        //rt.filterMode = FilterMode.Point;
 
         SW = spriteSheet.width;
         SH = spriteSheet.height;
 
-        if (SW == 0) SW = 256;
-        if (SH == 0) SH = 256;
-    }
+        if (width == 0) width = 256;
+        if (height == 0) height = 256;
 
-    float t = 0;
+        pos = new Vector2(Random.Range(0, width-16), Random.Range(0, height - 16));
+        vel = new Vector2(1.5f, 1);
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-        t += Time.deltaTime;
+        // run at a solid 60fps
+        if (Time.time - t < 1.0 / frameRate) return;
+        t = Time.time;
 
         // set our render texture to be drawable
         RenderTexture.active = rt;
@@ -59,11 +68,10 @@ public class renderer : MonoBehaviour
         GL.PushMatrix();
         GL.LoadPixelMatrix(0, width, height, 0);
 
-
+        UpdateCat();
         // sprite drawing goes here
         //drawSprite(0, 0, 16, 32, 16, 16, false);
-        drawSprite(16, 0, 24f + 16f * Mathf.Sin(t), 16, 16, 16);
-
+        drawSprite(16, 0, pos.x, pos.y, 16, 16);
 
         GL.PopMatrix();
 
@@ -71,12 +79,25 @@ public class renderer : MonoBehaviour
         RenderTexture.active = null;
     }
 
+    private void UpdateCat()
+    {
+        pos += vel;
+
+        if (pos.x > width - 16) vel.x = -Mathf.Abs(vel.x);
+        if (pos.x < 0) vel.x = Mathf.Abs(vel.x);
+        if (pos.y > height - 16) vel.y = -Mathf.Abs(vel.y);
+        if (pos.y < 0) vel.y = Mathf.Abs(vel.y);
+
+        //Debug.Log(vel);
+    }
+
     void drawSprite(float sx, float sy, float x, float y, float sw, float sh)
     {
         // sourceRect uses normalized coodinates so (1, 1) is the size of the whole texture
         // so for pixel coordinates we use divide the desired coorinate by the width of the texture
         Rect source = new Rect(sx / SW, sy / SH, sw / SW, sh / SH);
-        //if(flip) source = new Rect(sx / SW, sy / SH, -sw / SW, sh / SH);
+
+        //source = new Rect(sx / SW, sy / SH, -sw / SW, sh / SH);
 
         Graphics.DrawTexture(new Rect(x, y, sw, sh), spriteSheet, source, (int) sw, (int) sw, (int) sh, (int) sh, null, -1);
     }
