@@ -17,25 +17,23 @@ public class renderer : MonoBehaviour
 
     RenderTexture rt;
 
-    Renderer mr;
+    Renderer m_Renderer;
 
     float SW;
     float SH;
 
     float t = 0;
 
-    Vector2 pos;
-    Vector2 vel;
-
     // Start is called before the first frame update
     void Start()
     {
-        mr = GetComponent<Renderer>();
-
-        //mr.material.EnableKeyword("_EMISSIONMAP");
+        m_Renderer = GetComponent<Renderer>();
 
         rt = new RenderTexture(width, height, 32);
-        mr.material.SetTexture("_MainTex", rt);
+        m_Renderer.material.SetTexture("_MainTex", rt);
+
+        // uncomment for emissive screen
+        //mr.material.EnableKeyword("_EMISSIONMAP");
         //mr.material.SetTexture("_EmissionMap", rt);
 
         rt.filterMode = FilterMode.Point;
@@ -46,15 +44,12 @@ public class renderer : MonoBehaviour
         if (width == 0) width = 256;
         if (height == 0) height = 256;
 
-        pos = new Vector2(Random.Range(0, width-16), Random.Range(0, height - 16));
-        vel = new Vector2(1.5f, 1);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        // run at a solid 60fps
+        // run at a solid 30fps
         if (Time.time - t < 1.0 / frameRate) return;
         t = Time.time;
 
@@ -68,10 +63,9 @@ public class renderer : MonoBehaviour
         GL.PushMatrix();
         GL.LoadPixelMatrix(0, width, height, 0);
 
-        UpdateCat();
         // sprite drawing goes here
-        //drawSprite(0, 0, 16, 32, 16, 16, false);
-        drawSprite(16, 0, pos.x, pos.y, 16, 16);
+        spr(16, 0, 0, 0, 16, 16, false, 16, 32);
+        spr(16, 0, 16, 16, 16, 16, true);
 
         GL.PopMatrix();
 
@@ -79,26 +73,28 @@ public class renderer : MonoBehaviour
         RenderTexture.active = null;
     }
 
-    private void UpdateCat()
+    // sprite functions
+
+    void spr(float sx, float sy, float x, float y)
     {
-        pos += vel;
-
-        if (pos.x > width - 16) vel.x = -Mathf.Abs(vel.x);
-        if (pos.x < 0) vel.x = Mathf.Abs(vel.x);
-        if (pos.y > height - 16) vel.y = -Mathf.Abs(vel.y);
-        if (pos.y < 0) vel.y = Mathf.Abs(vel.y);
-
-        //Debug.Log(vel);
+        spr(sx, sy, x, y, 16, 16, false, 16, 16);
     }
 
-    void drawSprite(float sx, float sy, float x, float y, float sw, float sh)
+    void spr(float sx, float sy, float x, float y, float sw, float sh)
     {
-        // sourceRect uses normalized coodinates so (1, 1) is the size of the whole texture
-        // so for pixel coordinates we use divide the desired coorinate by the width of the texture
-        Rect source = new Rect(sx / SW, sy / SH, sw / SW, sh / SH);
+        spr(sx, sy, x, y, sw, sh, false, sw, sh);
+    }
 
-        //source = new Rect(sx / SW, sy / SH, -sw / SW, sh / SH);
+    void spr(float sx, float sy, float x, float y, float sw, float sh, bool flip)
+    {
+        spr(sx, sy, x, y, sw, sh, flip, sw, sh);
+    }
 
-        Graphics.DrawTexture(new Rect(x, y, sw, sh), spriteSheet, source, (int) sw, (int) sw, (int) sh, (int) sh, null, -1);
+    void spr(float sx, float sy, float x, float y, float sw, float sh, bool flip, float w, float h)
+    {
+        Rect source = new Rect(sx / SW, (SH-sy-sh) / SH, sw / SW, sh / SH);
+        Rect dest = new Rect(x, y, w, h);
+        if (flip) dest = new Rect(x + sw, y, -sw, sh);
+        Graphics.DrawTexture(dest, spriteSheet, source, 0,0,0,0, null, -1);
     }
 }
