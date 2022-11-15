@@ -15,13 +15,13 @@ class TestGame : MiniGame
 
     public override void NewGame()
     {
-
+        x = 0;
     }
 
     public override void Draw()
     {
-        if (btn.up) x++;
-        if (btn.down) x--;
+        if (btn.up) x--;
+        if (btn.down) x++;
 
         R.spr(16, 0, 32 + 16 * Mathf.Sin(frameCount / 10f) - 8, 16 + x);
     }

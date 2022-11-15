@@ -36,7 +36,8 @@ public class MiniRenderer : MonoBehaviour
         public bool flip;
         public Texture texture;
 
-        public Spr(float sx, float sy, float x, float y, float sw, float sh, bool flip, float w, float h, Texture texture) : this() // I don't know what ": this()" is for
+        // I don't know what ": this()" is for
+        public Spr(float sx, float sy, float x, float y, float sw, float sh, bool flip, float w, float h, Texture texture) : this()
         {
             this.sx = sx;
             this.sy = sy;
@@ -54,7 +55,7 @@ public class MiniRenderer : MonoBehaviour
     Stack<Spr>[] spr_buffer; // array of stacks of Sprs
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_Renderer = GetComponent<Renderer>();
 
@@ -107,18 +108,13 @@ public class MiniRenderer : MonoBehaviour
         RenderTexture.active = null;
     }
 
-    void Clear()
-    {
-        // clears texture
-        GL.Clear(true, true, new Color(0, 0, 0, 1));
-    }
-
     // draws everything from the sprite buffer to the screen
     public void Display()
     {
-        Clear();
+        // clears texture
+        GL.Clear(true, true, new Color(0, 0, 0, 1));
 
-        for(int i = 0; i < spr_buffer.Length; i++)
+        for (int i = 0; i < spr_buffer.Length; i++)
             while (spr_buffer[i].Count > 0) drawSprite(spr_buffer[i].Pop());
     }
 
