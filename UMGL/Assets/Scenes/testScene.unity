@@ -363,9 +363,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteSheet: {fileID: 2800000, guid: ed2da1bb21f1444c1a8326031b678ab0, type: 3}
+  fontSheet: {fileID: 2800000, guid: a80eca6639aed413495e485d3dd4cbff, type: 3}
   frameRate: 30
   width: 64
   height: 48
+  layers: 10
 --- !u!64 &2119762456
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -439,9 +441,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2119762453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9345ae960da714b8e8999289cc3b3ea7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9764b8877822148f58e174749a9e810c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  R: {fileID: 0}
+  buttonMap: {fileID: 11400000, guid: 140e59677afac4ad7b40600382c212f6, type: 2}
 --- !u!23 &99113807408530038
 MeshRenderer:
   m_ObjectHideFlags: 0

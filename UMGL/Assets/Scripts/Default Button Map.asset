@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227635acfd24948b4833967e071e8b36, type: 3}
+  m_Name: Default Button Map
+  m_EditorClassIdentifier: 
+  a: 0d000000780000006b000000
+  b: 200000007a0000006a000000
+  up: 7700000011010000
+  down: 7300000012010000
+  left: 6100000014010000
+  right: 6400000013010000
+  start: 1b00000071000000
+  select: 0900000065000000
