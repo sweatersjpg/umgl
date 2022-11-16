@@ -5,6 +5,7 @@ using UnityEngine;
 class TestGame : MiniGame
 {
     int x = 0;
+    int y = 0;
 
     public override void Title()
     {
@@ -16,6 +17,7 @@ class TestGame : MiniGame
     public override void NewGame()
     {
         x = 0;
+        y = 0;
     }
 
     public override void Draw()
@@ -23,6 +25,9 @@ class TestGame : MiniGame
         if (btn.up) x--;
         if (btn.down) x++;
 
-        R.spr(16, 0, 32 + 16 * Mathf.Sin(frameCount / 10f) - 8, 16 + x);
+        if (btn.left) y--;
+        if (btn.right) y++;
+
+        R.spr(16, 0, y, x);
     }
 }

@@ -63,8 +63,8 @@ public class MiniRenderer : MonoBehaviour
         m_Renderer.material.SetTexture("_MainTex", rt);
 
         // uncomment for emissive screen
-        //mr.material.EnableKeyword("_EMISSIONMAP");
-        //mr.material.SetTexture("_EmissionMap", rt);
+        m_Renderer.material.EnableKeyword("_EMISSIONMAP");
+        m_Renderer.material.SetTexture("_EmissionMap", rt);
 
         rt.filterMode = FilterMode.Point;
 
@@ -112,7 +112,7 @@ public class MiniRenderer : MonoBehaviour
     public void Display()
     {
         // clears texture
-        GL.Clear(true, true, new Color(0, 0, 0, 1));
+        GL.Clear(true, true, new Color(0, 0, 0, 0));
 
         for (int i = 0; i < spr_buffer.Length; i++)
             while (spr_buffer[i].Count > 0) drawSprite(spr_buffer[i].Pop());
