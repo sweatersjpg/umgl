@@ -10,6 +10,8 @@ public abstract class MiniGame : MonoBehaviour
     [SerializeField]
     ButtonMap buttonMap;
 
+    public bool isSelected = false;
+
     public class BtnInput
     {
         public bool a, b, up, down, left, right, start, select;
@@ -66,6 +68,8 @@ public abstract class MiniGame : MonoBehaviour
     {
         // -- inputs --
         // get key codes from button map
+        if (!isSelected) return;
+
         KeyCode[][] buttonMapArray = buttonMap.ToArray();
         for (int i = 0; i < btn.input.Length; i++)
         {
@@ -95,22 +99,32 @@ public abstract class MiniGame : MonoBehaviour
         {
             frameCount++;
             Draw();
-            if (btn.start && !pbtn.start)
+            if (willPause || (btn.start && !pbtn.start))
             { // if start button pressed pause the game
+                willPause = false;
                 int oldL = R.lget();
                 R.lset(9); // set to top layer
                 R.put("pause", 32 - 4 * 5, 20);// draw pause button over the game
                 R.lset(oldL);
-                gameState++;
+                gameState = 2;
             }
             R.Display();
         }
         else
         {
-            if (btn.start && !pbtn.start) gameState--;
+            if ((btn.start && !pbtn.start) || (btn.a && !pbtn.a) || (btn.b && !pbtn.b)) gameState--;
         }
 
         pbtn = btn.copy(); // store btn into pbtn
+    }
+
+    bool willPause = false;
+
+    public void Pause()
+    {
+        if (gameState != 1) return;
+
+        willPause = true;
     }
 
     public void GameOver()

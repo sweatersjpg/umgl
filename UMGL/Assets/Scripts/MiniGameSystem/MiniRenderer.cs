@@ -22,10 +22,7 @@ public class MiniRenderer : MonoBehaviour
     int layers = 10;
 
     RenderTexture rt;
-
     Renderer m_Renderer;
-
-    float t = 0;
 
     int currentLayer = 0;
 
@@ -62,9 +59,11 @@ public class MiniRenderer : MonoBehaviour
         rt = new RenderTexture(width, height, 32);
         m_Renderer.material.SetTexture("_MainTex", rt);
 
+        m_Renderer.material.SetTexture("_AlphaTex", rt);
+
         // uncomment for emissive screen
-        m_Renderer.material.EnableKeyword("_EMISSIONMAP");
-        m_Renderer.material.SetTexture("_EmissionMap", rt);
+        //m_Renderer.material.EnableKeyword("_EMISSIONMAP");
+        //m_Renderer.material.SetTexture("_EmissionMap", rt);
 
         rt.filterMode = FilterMode.Point;
 
@@ -80,16 +79,23 @@ public class MiniRenderer : MonoBehaviour
 
         gameObject.SendMessage("Init", this);
 
+        InvokeRepeating(nameof(Render), 0f, 1f/frameRate);
+
     }
 
     // Update is called once per frame
-    void Update()
+    //void Update()
+    //{
+    //    // run at a solid 30fps (thats a fuckin lie... somehow its not at all solid)
+    //    t += Time.deltaTime;
+    //    if (t >= 1f / frameRate)
+    //    {
+    //        Render();
+    //    }
+    //}
+
+    void Render()
     {
-
-        // run at a solid 30fps
-        if (Time.time - t < 1.0 / frameRate) return;
-        t = Time.time;
-
         // set our render texture to be drawable
         RenderTexture.active = rt;
 
@@ -112,10 +118,16 @@ public class MiniRenderer : MonoBehaviour
     public void Display()
     {
         // clears texture
-        GL.Clear(true, true, new Color(0, 0, 0, 0));
+        GL.Clear(true, true, new Color(0, 0, 0, 1));
 
         for (int i = 0; i < spr_buffer.Length; i++)
-            while (spr_buffer[i].Count > 0) drawSprite(spr_buffer[i].Pop());
+        {
+            // this is actually stupid lmao, idk why I though it should be a stack!
+            Stack<Spr> tempBuffer = new Stack<Spr>();
+            while (spr_buffer[i].Count > 0) tempBuffer.Push(spr_buffer[i].Pop());
+            while (tempBuffer.Count > 0) drawSprite(tempBuffer.Pop());
+        }
+            
     }
 
     // --- layer functions ---
