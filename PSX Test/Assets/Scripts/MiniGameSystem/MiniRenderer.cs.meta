@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 2879cf13c50d4433a81fb7b06ca519f4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spriteSheet: {instanceID: 0}
+  - fontSheet: {fileID: 2800000, guid: a80eca6639aed413495e485d3dd4cbff, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
