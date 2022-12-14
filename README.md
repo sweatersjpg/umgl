@@ -1,9 +1,6 @@
 # Unity Mini-Game Library
 
-<aside>
-<img src="https://www.notion.so/icons/star_gray.svg" alt="https://www.notion.so/icons/star_gray.svg" width="40px" /> UMGL is a library for rendering 2D sprites onto a 3D plane
-
-</aside>
+UMGL is a library for rendering 2D sprites onto a 3D plane
 
 ## What is it for?
 
@@ -75,10 +72,10 @@ The MiniRenderer attached to your screen is in charge of rendering sprites and t
 
 ![Untitled](Documentation/Untitled%202.png)
 
-<aside>
-<img src="https://www.notion.so/icons/light-bulb_gray.svg" alt="https://www.notion.so/icons/light-bulb_gray.svg" width="40px" /> Access the renderer in a MiniGame script with the variable `R`
-
-</aside>
+Access the renderer in a MiniGame script with the variable `R` eg.
+```csharp
+R.spr(0, 0, 16, 16);
+```
 
 ### Sprites
 
@@ -135,48 +132,43 @@ void lset(int layer)
 Currently, buttons are limited to a similar setup to a GameBoy:
  `A`, `B`, `LEFT`, `RIGHT`, `UP`, `DOWN`, `START`, `SELECT`
 
-<aside>
-<img src="https://www.notion.so/icons/light-bulb_gray.svg" alt="https://www.notion.so/icons/light-bulb_gray.svg" width="40px" /> To create a new button mapping you can edit the default button map, or create a new ButtonMap scriptable object
-
-</aside>
+To create a new button mapping you can edit the default button map, or create a new ButtonMap scriptable object
 
 ### Button Booleans
 
 To check if a button is pressed on any given frame use:
 
-<aside>
-<img src="https://www.notion.so/icons/video-game_gray.svg" alt="https://www.notion.so/icons/video-game_gray.svg" width="40px" /> `btn.<button>` - returns true or false for given button
-
-</aside>
+```csharp
+btn.<button> // returns true or false for given button
+```
 
 (eg. `btn.a`, `btn.b`, `btn.up` etc.)
 
 To check if a button was pressed on the previous frame use:
 
-<aside>
-<img src="https://www.notion.so/icons/video-game_gray.svg" alt="https://www.notion.so/icons/video-game_gray.svg" width="40px" /> `pbtn.<button>` - returns true or false for given button
-
-</aside>
+```csharp
+`pbtn.<button>` // returns true or false for given button
+```
 
 (eg. `pbtn.a`, `pbtn.b`, `pbtn.up` etc.)
 
 This setup allows for a variety of use cases such as:
 
-```jsx
+```csharp
 (btn.a && !pbtn.a)
 // returns true only on the exact frame we hit the button
 ```
 
 or:
 
-```jsx
+```csharp
 (!btn.a && pbtn.a)
 // returns true only on the exact frame we released a button
 ```
 
 If you want to check if a couple buttons have just been pressed we can use:
 
-```jsx
+```csharp
 (btn.a && !pbtn.a) || (btn.b && !pbtn.b)
 // true on the frame a or b have been pressed
 ```
