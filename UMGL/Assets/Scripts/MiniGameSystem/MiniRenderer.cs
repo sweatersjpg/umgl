@@ -127,7 +127,7 @@ public class MiniRenderer : MonoBehaviour
             while (spr_buffer[i].Count > 0) tempBuffer.Push(spr_buffer[i].Pop());
             while (tempBuffer.Count > 0) drawSprite(tempBuffer.Pop());
         }
-            
+        
     }
 
     // --- layer functions ---
@@ -144,7 +144,7 @@ public class MiniRenderer : MonoBehaviour
 
     // --- text functions ---
 
-    public void put(float n, float x, float y) =>put(n.ToString(), x, y);
+    public void put(float n, float x, float y) => put(n.ToString(), x, y);
     public void put(int n, float x, float y) => put(n.ToString(), x, y);
 
     public void put(string str, float X, float Y)

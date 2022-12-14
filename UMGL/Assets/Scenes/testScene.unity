@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8878f15a5edd442bea80561789d9488a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGame: {fileID: 1652038716}
+  miniGame: {fileID: 1652038720}
   a_button: {fileID: 982951210}
   b_button: {fileID: 1535111434}
   start_button: {fileID: 1771115306}
@@ -780,14 +780,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591623069}
-  m_LocalRotation: {x: 0.31015372, y: -0, z: -0, w: 0.95068645}
-  m_LocalPosition: {x: 0, y: 3.67, z: -10.68}
+  m_LocalRotation: {x: 0.31015158, y: -0.0035372707, z: -0.001154003, w: 0.9506799}
+  m_LocalPosition: {x: 0.18, y: 5.35, z: -12.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 36.137, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 36.136, y: -0.528, z: -0.311}
 --- !u!114 &1591623073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 1652038719}
   - component: {fileID: 1652038718}
   - component: {fileID: 1652038717}
-  - component: {fileID: 1652038716}
+  - component: {fileID: 1652038720}
   m_Layer: 0
   m_Name: Screen
   m_TagString: Untagged
@@ -835,23 +835,6 @@ Transform:
   m_Father: {fileID: 1290995675}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1652038716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652038714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9764b8877822148f58e174749a9e810c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  R: {fileID: 0}
-  buttonMap: {fileID: 11400000, guid: 140e59677afac4ad7b40600382c212f6, type: 2}
-  isSelected: 0
-  frameCount: 0
-  cam: {x: 0, y: 0}
 --- !u!114 &1652038717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,7 +847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2879cf13c50d4433a81fb7b06ca519f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteSheet: {fileID: 2800000, guid: ed2da1bb21f1444c1a8326031b678ab0, type: 3}
+  spriteSheet: {fileID: 2800000, guid: 648381ea6b92d4602a11a85859785f80, type: 3}
   fontSheet: {fileID: 2800000, guid: a80eca6639aed413495e485d3dd4cbff, type: 3}
   frameRate: 30
   width: 64
@@ -920,6 +903,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652038714}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1652038720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652038714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012d4bc3840f5453582f056fc5627498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  R: {fileID: 0}
+  buttonMap: {fileID: 11400000, guid: 140e59677afac4ad7b40600382c212f6, type: 2}
+  isSelected: 0
+  frameCount: 0
 --- !u!1 &1765930233
 GameObject:
   m_ObjectHideFlags: 0
